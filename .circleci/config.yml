@@ -27,16 +27,16 @@ jobs:
     resource_class: medium
     steps:
        - attach_workspace:
-          at: /tmp/workspace
+          at: ./var/www/mysite.com/_site/
        - add_ssh_keys:
           fingerprints:
             - "32:5f:6f:4d:f1:41:7d:86:58:ed:84:f1:18:f0:89:50"
        - run:
             name: Deploy Over SSH
             command: |
-              ssh -o StrictHostKeyChecking=no circleci@148.100.79.41 "sudo touch /tmp/testing.txt"
+              scp -r /var/www/mysite.com/_site circleci@148.100.79.41:/var/www/mysite.com/_site
        
-# Invoke jobs via workflows
+# Invoke jobs via workflows ssh -o StrictHostKeyChecking=no circleci@148.100.79.41 "sudo touch /tmp/testing.txt"
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
     build-and-deploy:
