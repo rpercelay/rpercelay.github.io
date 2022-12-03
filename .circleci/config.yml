@@ -27,10 +27,10 @@ jobs:
     resource_class: medium
     steps:
        - attach_workspace:
-          at: ./var/www/mysite.com/_site/
+        at: ./_site
        - add_ssh_keys:
           fingerprints:
-            - "32:5f:6f:4d:f1:41:7d:86:58:ed:84:f1:18:f0:89:50"
+            - "e5:63:5b:8f:3b:8d:bb:d1:70:7d:9f:2b:04:14:c5:10"
        - run:
             name: Deploy Over SSH
             command: |
