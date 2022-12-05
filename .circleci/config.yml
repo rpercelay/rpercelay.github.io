@@ -42,7 +42,11 @@ jobs:
 
        - run:
             name: Deploy Over SSH
-            command: |
+            command:
+              ssh -o StrictHostKeyChecking=no circleci@148.100.79.41 "sudo touch /tmp/testing.txt"
+       - run:
+            name: Deploy over SCP
+            command:
               scp -r ~/_site/ circleci@148.100.79.41:"/var/www/mysite.com/_site"
 
 # Invoke jobs via workflows
