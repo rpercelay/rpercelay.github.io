@@ -15,31 +15,40 @@ jobs:
     steps:
       - checkout
       - run: ruby --version
-      - run: bundle install
-      - run: bundle exec jekyll serve
+      - run:
+          name: Bundle Install
+          command: bundle check || bundle install
+      - run:
+          name: Jekyll build
+          command: bundle exec jekyll build
       - persist_to_workspace:
-        root: ./
-        paths: _site
+          root: .
+          paths:
+            - _site
+
 
   deploy:
     machine:
       image: ubuntu-2004:current
     resource_class: medium
     steps:
-       - attach_workspace:
-          at: ./tmp/directory/
+
        - add_ssh_keys:
           fingerprints:
             - "32:5f:6f:4d:f1:41:7d:86:58:ed:84:f1:18:f0:89:50"
+
+       - attach_workspace:
+            at: ./
+
        - run:
             name: Deploy Over SSH
-            command: 
-              scp -r /var/www/mysite.com/_site circleci@148.100.79.41:/var/www/mysite.com/_site
-       
-# Invoke jobs via workflows ssh -o StrictHostKeyChecking=no circleci@148.100.79.41 "sudo touch /tmp/testing.txt"
+            command: |
+              ssh -o StrictHostKeyChecking=no circleci@1148.100.79.41 "sudo touch /tmp/testing.txt"
+
+# Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
     build-and-deploy:
       jobs:
-          # - build
+          - build
           - deploy
