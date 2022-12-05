@@ -43,7 +43,7 @@ jobs:
        - run:
             name: Deploy Over SSH
             command: |
-              ssh -o StrictHostKeyChecking=no circleci@1148.100.79.41 "sudo touch /tmp/testing.txt"
+              ssh -o StrictHostKeyChecking=no circleci@148.100.79.41 "sudo touch /tmp/testing.txt"
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
