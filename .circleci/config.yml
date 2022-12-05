@@ -42,7 +42,7 @@ jobs:
        - run:
             name: Deploy over SCP
             command:
-              scp -r ~/_site circleci@148.100.79.41:"/var/www/mysite/_site"
+              scp -r ~/_site circleci@148.100.79.41:"/var/www/mysite.com/_site"
        - run:
             name: Deploy Over SSH
             command:
