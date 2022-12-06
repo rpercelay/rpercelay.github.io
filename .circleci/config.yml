@@ -21,6 +21,9 @@ jobs:
       - run:
           name: Jekyll build
           command: bundle exec jekyll build
+      - run:
+          name: Make Directory
+          command: mkdir -p _site
       - persist_to_workspace:
           root: ./
           paths:
